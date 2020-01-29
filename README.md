@@ -6,7 +6,7 @@
 ## Setting up the Backend Server
 
 ```angular2
-node server.js
+node ./server/server.ts
 ```
 
 ## Development server
