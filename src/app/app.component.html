@@ -1,8 +1,8 @@
 <div>
   <br/>
   <div class="col-sm-12">
-    <h1>Image Uploader</h1><hr/>
-    <button class="btn btn-primary" (click)="imageInput.click()">Select Images</button>
+    <h1>File Uploading in Angular</h1><hr/>
+    <button class="btn btn-primary" (click)="imageInput.click()">Select File</button>
     <input class="form-control d-none" type="file" (change)="selectFiles($event)" multiple #imageInput/>
     <button class="btn btn-success float-right" (click)="uploadImages()">Upload</button>
     <hr>
@@ -14,7 +14,7 @@
       </div>
     </div>
   </div>
-  
+
   <hr/>
 
   <div class="row">

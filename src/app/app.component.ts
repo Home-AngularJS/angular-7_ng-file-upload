@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { HttpEventType } from "@angular/common/http";
-import { moveItemInArray, transferArrayItem, CdkDragDrop } from "@angular/cdk/drag-drop"
+import { HttpClient } from '@angular/common/http';
+import { HttpEventType } from '@angular/common/http';
+import { moveItemInArray, transferArrayItem, CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Observable } from 'rxjs';
 
 class ImageFile {
@@ -27,20 +27,20 @@ export class AppComponent {
     this.images = [];
     let files : FileList = event.target.files;
     for (let i = 0; i < files.length; i++) {
-      if (files.item(i).name.match(/\.(jpg|jpeg|png|gif)$/)) {
-        this.images.push({file: files.item(i), uploadProgress: "0"});
-      }
+      // if (files.item(i).name.match(/\.(jpg|jpeg|png|gif)$/)) {
+        this.images.push({file: files.item(i), uploadProgress: '0'});
+      // }
     }
     this.message = `${this.images.length} valid image(s) selected`;
   }
 
-  uploadImages(){
+  uploadImages() {
     this.images.map((image, index) => {
       const formData = new FormData();
-      formData.append("image", image.file, image.file.name);
+      formData.append('image', image.file, image.file.name);
       return this.http.post('http://localhost:5000/upload', formData, {
         reportProgress: true,
-        observe: "events"
+        observe: 'events'
       })
         .subscribe(event => {
           if (event.type === HttpEventType.UploadProgress ) {
