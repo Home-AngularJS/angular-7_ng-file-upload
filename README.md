@@ -1,6 +1,13 @@
-# NgImageUpload
+# Implement File Uploading in Angular (_NgImageUpload_)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.4.
+* Туториал: https://www.genuitec.com/angular-7-uploads-node-js
+* Репозиторий: https://github.com/Genuitec/article-sources/tree/master/ng-image-upload **(**_https://github.com/Genuitec/article-sources_**)**
+
+## Setting up the Backend Server
+
+```angular2
+node server.js
+```
 
 ## Development server
 
