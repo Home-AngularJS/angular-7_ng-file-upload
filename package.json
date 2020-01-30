@@ -31,7 +31,8 @@
     "multer": "^1.4.1",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
-    "zone.js": "~0.8.26"
+    "zone.js": "~0.8.26",
+    "bootstrap": "^4.2.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.0",
@@ -39,7 +40,6 @@
     "@angular/compiler-cli": "~7.2.0",
     "@angular/language-service": "~7.2.0",
     "@types/node": "~8.9.4",
-    "bootstrap": "3.3.7",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
     "codelyzer": "~4.5.0",
