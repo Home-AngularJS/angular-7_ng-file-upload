@@ -52,16 +52,17 @@
                 <p class="text-info" *ngIf="item.responseStatus">&nbsp;<strong>{{item.responseStatus}}</strong></p>
               </td>
               <td>
-                <button type="button" class="btn btn-success" (click)="uploadFile(item)">
+                <button type="button" class="btn btn-success" (click)="uploadFile(item)" [disabled]="item.uploadProgress!='0'">
                   <span class="glyphicon glyphicon-upload" title="Выгрузить файл"></span>
                 </button>
                 &nbsp;
-                <button type="button" class="btn btn-warning btn-s" (click)="cancelFile(item)">
-<!--                <button type="button" class="btn btn-warning btn-s" (click)="cancelFile(item)" [disabled]="item.uploadProgress!='0'">-->
+<!--                <button type="button" class="btn btn-warning btn-s" (click)="cancelFile(item)">-->
+                <button type="button" class="btn btn-warning btn-s" (click)="cancelFile(item)" [disabled]="item.uploadProgress=='0'">
                   <span class="glyphicon glyphicon-ban-circle" title="Отменить"></span>
                 </button>
                 &nbsp;
-                <button type="button" class="btn btn-danger" (click)="removeFile(item)" [disabled]="!item.isUploading">
+<!--                <button type="button" class="btn btn-danger" (click)="removeFile(item)" [disabled]="!item.isUploading">&nbsp;-->
+                <button type="button" class="btn btn-danger" (click)="removeFile(item)">
                   <span class="glyphicon glyphicon-trash" title="Удалить"></span>
                 </button>
               </td>
