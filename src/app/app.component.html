@@ -10,15 +10,11 @@
           <table cellpadding="10">
             <tr>
               <td>
-<!--                <button class="btn btn-primary" (click)="fileInput.click()">Select File(s)</button> &nbsp;-->
                 <button type="button" class="btn btn-primary" (click)="fileInput.click()">
                   <span class="glyphicon glyphicon-open-file" title="Выбрать файл(ы)"></span>
                 </button>
                 &nbsp;
                 <input class="form-control d-none" type="file" (change)="selectFiles($event)" multiple #fileInput/>
-<!--                <button type="button" class="btn btn-success" (click)="uploadImages()" [disabled]="!message">-->
-<!--                  <span class="glyphicon glyphicon-upload" title="Выгрузить файл(ы)"></span>-->
-<!--                </button>-->
               </td>
               <!--        <td>-->
               <!--          <p class="text-info" *ngIf="message"><strong>{{message}}</strong></p>-->
@@ -30,12 +26,13 @@
       </tr>
       <tr>
         <td colspan="3">
-          <table border="0" cellpadding="5" cellspacing="5" width="100%" *ngIf="message">
+          <table border="0" cellpadding="5" cellspacing="5" width="100%">
             <thead>
             <tr>
               <th align="center">Name</th>
               <th align="center">Size</th>
               <th align="center">Progress</th>
+              <th align="center">Status</th>
               <th align="center">Actions</th>
             </tr>
             </thead>
@@ -50,6 +47,9 @@
                 <div class="progress" style="margin-bottom: 10px" *ngIf="item.uploadProgress">
                   <div class="progress-bar progress-bar-striped progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" naria-valuemax="100" [ngStyle]="{'width': item.uploadProgress }"></div>
                 </div>
+              </td>
+              <td>
+                <p class="text-info" *ngIf="item.uploadStatus"><strong>{{item.uploadStatus}}</strong></p>
               </td>
               <td>
                 &nbsp;
