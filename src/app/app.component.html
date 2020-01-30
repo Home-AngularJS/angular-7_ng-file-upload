@@ -49,16 +49,20 @@
                 </div>
               </td>
               <td>
-                <p class="text-info" *ngIf="item.uploadStatus"><strong>{{item.uploadStatus}}</strong></p>
+                <p class="text-info" *ngIf="item.responseStatus">&nbsp;<strong>{{item.responseStatus}}</strong></p>
               </td>
               <td>
-                &nbsp;
                 <button type="button" class="btn btn-success" (click)="uploadFile(item)">
                   <span class="glyphicon glyphicon-upload" title="Выгрузить файл"></span>
                 </button>
                 &nbsp;
-                <button type="button" class="btn btn-danger" (click)="removeFile(item)">
-                  <span class="glyphicon glyphicon-trash" title="Выгрузить файл"></span>
+                <button type="button" class="btn btn-warning btn-s" (click)="cancelFile(item)">
+<!--                <button type="button" class="btn btn-warning btn-s" (click)="cancelFile(item)" [disabled]="item.uploadProgress!='0'">-->
+                  <span class="glyphicon glyphicon-ban-circle" title="Отменить"></span>
+                </button>
+                &nbsp;
+                <button type="button" class="btn btn-danger" (click)="removeFile(item)" [disabled]="!item.isUploading">
+                  <span class="glyphicon glyphicon-trash" title="Удалить"></span>
                 </button>
               </td>
             </tr>

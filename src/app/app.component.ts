@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
 class ItemFile {
   file: File;
   uploadProgress: string;
-  uploadStatus: string;
+  responseStatus: string;
+  isUploading: boolean;
 }
 
 @Component({
@@ -28,7 +29,7 @@ export class AppComponent {
     let files: FileList = event.target.files;
     for (let i = 0; i < files.length; i++) {
       // if (files.item(i).name.match(/\.(jpg|jpeg|png|gif)$/)) {
-        this.items.push({file: files.item(i), uploadProgress: '0', uploadStatus: ''});
+        this.items.push({file: files.item(i), uploadProgress: '0', responseStatus: '', isUploading: false});
       // }
     }
     this.message = `${this.items.length} valid image(s) selected`;
@@ -69,12 +70,23 @@ export class AppComponent {
           // console.log('Загрузка файла "' + fileName + '" успешно завершена!')
           console.log('Загрузка файла "' + item.file.name + '" успешно завершена!')
           let status: string = body.status
-          item.uploadStatus = status
+          item.responseStatus = status
+          item.isUploading = true;
         }
       }, error => {
       // alert( JSON.stringify(error) );
-      console.log('Ошибка загрузки файла: ' + item.file.name)
+      console.log('Ошибка загрузки файла: "' + item.file.name + '"?')
+      item.responseStatus = 'ERR'
     });
+  }
+
+  cancelFile(item: ItemFile) {
+    for (let i = 0; i < this.items.length; i++) {
+      if (this.items[i]==item) {
+        this.items[i].uploadProgress = '0'
+        this.items[i].responseStatus = ''
+      }
+    }
   }
 
   /**
