@@ -4,7 +4,7 @@ import { HttpEventType } from '@angular/common/http';
 import { moveItemInArray, transferArrayItem, CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Observable } from 'rxjs';
 
-class ImageFile {
+class ItemFile {
   file: File;
   uploadProgress: string;
 }
@@ -16,35 +16,35 @@ class ImageFile {
 })
 export class AppComponent {
 
-  images: ImageFile[] = [];
+  items: ItemFile[] = [];
   imageUrls: string[] = [];
   favourites: string[] = [];
   message: string = null;
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   selectFiles = (event) => {
-    this.images = [];
-    let files : FileList = event.target.files;
+    this.items = [];
+    let files: FileList = event.target.files;
     for (let i = 0; i < files.length; i++) {
       // if (files.item(i).name.match(/\.(jpg|jpeg|png|gif)$/)) {
-        this.images.push({file: files.item(i), uploadProgress: '0'});
+        this.items.push({file: files.item(i), uploadProgress: '0'});
       // }
     }
-    this.message = `${this.images.length} valid image(s) selected`;
+    this.message = `${this.items.length} valid image(s) selected`;
   }
 
-  uploadImages() {
-    this.images.map((image, index) => {
+  uploadFiles() {
+    this.items.map((item, index) => {
       const formData = new FormData();
-      formData.append('image', image.file, image.file.name);
+      formData.append('image', item.file, item.file.name);
       return this.http.post('http://localhost:5000/upload', formData, {
         reportProgress: true,
         observe: 'events'
       })
         .subscribe(event => {
           if (event.type === HttpEventType.UploadProgress ) {
-            image.uploadProgress = `${(event.loaded / event.total * 100)}%`;
+            item.uploadProgress = `${(event.loaded / event.total * 100)}%`;
           }
           if (event.type === HttpEventType.Response) {
             // this.imageUrls.push(event.body.imageUrl);
@@ -53,12 +53,24 @@ export class AppComponent {
     });
   }
 
-  drop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer !== event.container) {
-      transferArrayItem(event.previousContainer.data, event.container.data,
-      event.previousIndex, event.currentIndex)
-    } else {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    }
+  uploadFile(item) {
+    const formData = new FormData();
+    formData.append('image', item.file, item.file.name);
+    return this.http.post('http://localhost:5000/upload', formData, {
+      reportProgress: true,
+      observe: 'events'
+    })
+      .subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress ) {
+          item.uploadProgress = `${(event.loaded / event.total * 100)}%`;
+        }
+        if (event.type === HttpEventType.Response) {
+          // this.imageUrls.push(event.body.imageUrl);
+        }
+      });
+  }
+
+  removeFile(item: ItemFile) {
+      this.items.splice(this.items.indexOf(item),1);
   }
 }
